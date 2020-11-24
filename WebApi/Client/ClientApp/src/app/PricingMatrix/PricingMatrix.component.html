@@ -1,0 +1,31 @@
+<h2>Pricing Matrix</h2>
+<p *ngIf="!Detail"><em>Loading...</em></p>
+<table class='table table-dark' *ngIf="Detail">
+  <thead>
+    <tr>
+      <th>Pricing Name</th>
+      <th>Locale</th>
+      <th>Media Type</th>
+      <th>POS Type</th>
+      <th>Size</th>
+      <th>Dimension</th>
+      <th>Material</th>
+      <th>PriceType</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let detail of Detail | paginate: { itemsPerPage: 10, currentPage: p}">
+      <td>{{ detail.PriceMatrixName }}</td>
+      <td>{{ detail.language }}</td>
+      <td>{{ detail.Media_type }}</td>
+      <td>{{ detail.POS_Type }}</td>
+      <td>{{ detail.Size }}</td>
+      <td>{{ detail.Dim_Sval }}</td>
+      <td>{{ detail.Matrial }}</td>      
+      <td>{{ detail.PriceType }}</td>
+      <td></td>
+    </tr>
+  </tbody>
+  </table>
+<pagination-controls class="" *ngIf="Detail" (pageChange)="p = $event"></pagination-controls>

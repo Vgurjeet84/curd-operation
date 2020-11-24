@@ -1,0 +1,9 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "devDependencies": {
+    "ng": "0.0.0",
+    "ngx-pagination": "^3.2.1",
+    "serve": "^10.1.2"
+  }
+}

@@ -1,0 +1,134 @@
+<h1>User Detials</h1>
+
+
+
+<p *ngIf="!userdetail"><em>Loading...</em></p>
+
+<button type="button" class="btn" style="width:112px" data-toggle="modal" data-target="#myAddnewModal" contenteditable="false">Add New User</button>
+
+<table class='table' *ngIf="userdetail">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let detail of userdetail | paginate: { itemsPerPage: 5, currentPage: p}">
+      <td>{{ detail.ID }}</td>
+      <td>{{ detail.Name }}</td>
+      <td>{{ detail.Email }}</td>
+      <td>{{ detail.Role }}</td>
+      <td>{{ detail.Status }}</td>
+      <td>
+        <div>
+          <button type="button" class="btn" style="width:100px" (click)="EditUser(detail.ID )" data-toggle="modal" data-target="#myEditModal" contenteditable="false">Edit</button>
+          <button type="button" class="btn" style="width:100px" (click)="DeleteUser( detail.ID )" contenteditable="false">Delete</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+
+
+
+<div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" style="width: 720px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="header"><b>Update User</b></h5>
+        <a><i class="fa fa-close" data-dismiss="modal" #closeBtn></i></a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="EditUserForm">
+          <div>
+            <table id="tblUser" class="table table-striped table-responsive">
+              <tr>
+                <td>Name</td>
+                <td><input type="text" class="form-control" id="name" formControlName="Name"/> </td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td><input type="text" class="form-control" id="email" formControlName="Email"/> </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="radio">
+                    <label><input type="radio" name="Role" formControlName="Role" value="Admin">Admin</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="radio">
+                    <label><input type="radio" name="Role" formControlName="Role" value="Customer Executive">Customer Executive</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td> <button id="btnSubmit" type="button" class="btn btn-default" (click)="updateUser()">Update</button></td>
+              </tr>
+            </table>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myAddnewModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" style="width: 720px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="header"><b>Add User</b></h5>
+        <a><i class="fa fa-close" data-dismiss="modal" #closeBtn></i></a>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="AddUserForm">
+          <div>
+            <table id="tblUser" class="table table-striped table-responsive">
+              <tr>
+                <td>Name</td>
+                <td><input type="text" class="form-control" id="name" formControlName="Name" ngModel required/> </td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td><input type="text" class="form-control" id="email" formControlName="Email" ngModel required/> </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="radio">
+                    <label><input type="radio" name="Role" formControlName="Role" value="Admin" ngModel required>Admin</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="radio">
+                    <label><input type="radio" name="Role" formControlName="Role" value="Customer Executive" ngModel required>Customer Executive</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td> <button id="btnSubmit" type="button" class="btn btn-default" (click)="AddNewUser()">Add User</button></td>
+              </tr>
+            </table>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
